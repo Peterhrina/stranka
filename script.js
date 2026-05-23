@@ -545,25 +545,8 @@ const SECRET_TASKS_KONZOLOVE = [
   "44. Hlasovanie 2",
 ];
 
-const SECRET_BASE_PATH = ".";
-let SECRET_MANIFEST = null;
-let SECRET_MANIFEST_LOADING = null;
-
-function loadSecretManifest() {
-  if (SECRET_MANIFEST) return Promise.resolve(SECRET_MANIFEST);
-  if (SECRET_MANIFEST_LOADING) return SECRET_MANIFEST_LOADING;
-  SECRET_MANIFEST_LOADING = fetch("ulohy-manifest.json")
-    .then((r) => (r.ok ? r.json() : {}))
-    .then((data) => {
-      SECRET_MANIFEST = data;
-      return data;
-    })
-    .catch(() => {
-      SECRET_MANIFEST = {};
-      return {};
-    });
-  return SECRET_MANIFEST_LOADING;
-}
+const SECRET_BASE_PATH =
+  "../../Škola-hodiny/Precvičovanie/Material_dudo";
 
 function buildSecretListItem(folderName, categoryFolder) {
   const match = folderName.match(/^(\d+)\.\s*(.+)$/);
@@ -572,15 +555,18 @@ function buildSecretListItem(folderName, categoryFolder) {
   const isUnfinished = /NEDOROBENE/i.test(rawName);
   const displayName = rawName.replace(/\s*-\s*NEDOROBENE\s*$/i, "");
 
+  const href =
+    SECRET_BASE_PATH +
+    "/" +
+    encodeURIComponent(categoryFolder) +
+    "/" +
+    encodeURIComponent(folderName);
+
   const li = document.createElement("li");
   const a = document.createElement("a");
-  a.href = "#";
-  a.dataset.category = categoryFolder;
-  a.dataset.folder = folderName;
-  a.addEventListener("click", (e) => {
-    e.preventDefault();
-    openTaskViewer(categoryFolder, folderName, displayName);
-  });
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noopener";
 
   const numSpan = document.createElement("span");
   numSpan.className = "secret-list__num";
@@ -630,7 +616,6 @@ function populateSecretLists() {
 function showSecretModal() {
   const overlay = document.getElementById("secret-overlay");
   if (!overlay) return;
-  loadSecretManifest();
   populateSecretLists();
   overlay.hidden = false;
   document.body.style.overflow = "hidden";
@@ -643,132 +628,6 @@ function hideSecretModal() {
   document.body.style.overflow = "";
 }
 
-// ----- Viewer (zobrazí obsah súborov v priečinku úlohy) -----
-
-const IMG_EXT = new Set(["png", "jpg", "jpeg", "gif", "webp", "svg", "bmp"]);
-
-function fileExt(name) {
-  const i = name.lastIndexOf(".");
-  return i >= 0 ? name.slice(i + 1).toLowerCase() : "";
-}
-
-function buildFileUrl(category, folder, file) {
-  return (
-    SECRET_BASE_PATH +
-    "/" +
-    encodeURIComponent(category) +
-    "/" +
-    encodeURIComponent(folder) +
-    "/" +
-    encodeURIComponent(file)
-  );
-}
-
-function renderViewerFile(category, folder, file) {
-  const body = document.getElementById("viewer-body");
-  if (!body) return;
-  body.replaceChildren();
-
-  const url = buildFileUrl(category, folder, file);
-  const ext = fileExt(file);
-
-  if (IMG_EXT.has(ext)) {
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = file;
-    img.className = "viewer__image";
-    body.appendChild(img);
-    return;
-  }
-
-  // Textový súbor – fetch + zobraz
-  const pre = document.createElement("pre");
-  pre.className = "viewer__code";
-  const code = document.createElement("code");
-  code.textContent = "Načítavam…";
-  pre.appendChild(code);
-
-  const copyBtn = document.createElement("button");
-  copyBtn.className = "viewer__copy";
-  copyBtn.textContent = "📋 Skopírovať";
-  copyBtn.disabled = true;
-
-  body.appendChild(copyBtn);
-  body.appendChild(pre);
-
-  fetch(url)
-    .then((r) => {
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      return r.text();
-    })
-    .then((text) => {
-      code.textContent = text;
-      copyBtn.disabled = false;
-      copyBtn.addEventListener("click", () => {
-        copyToClipboard(text, copyBtn);
-      });
-      // copyToClipboard mení textContent – upravíme aby pasoval
-      copyBtn.dataset.originalText = "📋 Skopírovať";
-    })
-    .catch((err) => {
-      code.textContent = "Nepodarilo sa načítať súbor: " + err.message;
-    });
-}
-
-function openTaskViewer(category, folder, displayName) {
-  const viewer = document.getElementById("viewer-overlay");
-  if (!viewer) return;
-  const titleEl = document.getElementById("viewer-title");
-  const tabsEl = document.getElementById("viewer-tabs");
-  const body = document.getElementById("viewer-body");
-
-  if (titleEl) titleEl.textContent = displayName;
-  if (tabsEl) tabsEl.replaceChildren();
-  if (body) body.replaceChildren();
-
-  viewer.hidden = false;
-
-  loadSecretManifest().then((manifest) => {
-    const allFiles =
-      (manifest[category] && manifest[category][folder]) || [];
-    const files = allFiles.filter((f) => fileExt(f) === "py");
-
-    if (files.length === 0) {
-      const p = document.createElement("p");
-      p.className = "viewer__empty";
-      p.textContent =
-        "Pre túto úlohu zatiaľ nie je dostupný žiadny .py súbor.";
-      body.appendChild(p);
-      return;
-    }
-
-    // Ak je len jeden .py – záložky vôbec nezobrazuj
-    if (files.length > 1) {
-      files.forEach((file, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "viewer__tab" + (idx === 0 ? " active" : "");
-        btn.textContent = file;
-        btn.addEventListener("click", () => {
-          tabsEl
-            .querySelectorAll(".viewer__tab")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          renderViewerFile(category, folder, file);
-        });
-        tabsEl.appendChild(btn);
-      });
-    }
-
-    renderViewerFile(category, folder, files[0]);
-  });
-}
-
-function hideViewer() {
-  const viewer = document.getElementById("viewer-overlay");
-  if (!viewer) return;
-  viewer.hidden = true;
-}
-
 function initSecretModal() {
   const overlay = document.getElementById("secret-overlay");
   if (!overlay) return;
@@ -778,12 +637,7 @@ function initSecretModal() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      const viewer = document.getElementById("viewer-overlay");
-      if (viewer && !viewer.hidden) {
-        hideViewer();
-      } else if (!overlay.hidden) {
-        hideSecretModal();
-      }
+      if (!overlay.hidden) hideSecretModal();
       buffer = "";
       return;
     }
@@ -807,14 +661,4 @@ function initSecretModal() {
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) hideSecretModal();
   });
-
-  const viewerCloseBtn = document.getElementById("viewer-close");
-  if (viewerCloseBtn) viewerCloseBtn.addEventListener("click", hideViewer);
-
-  const viewerOverlay = document.getElementById("viewer-overlay");
-  if (viewerOverlay) {
-    viewerOverlay.addEventListener("click", (e) => {
-      if (e.target === viewerOverlay) hideViewer();
-    });
-  }
 }
