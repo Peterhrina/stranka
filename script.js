@@ -545,7 +545,7 @@ const SECRET_TASKS_KONZOLOVE = [
   "44. Hlasovanie 2",
 ];
 
-const SECRET_BASE_PATH = ".";
+const SECRET_BASE_PATH = "https://github.com/Peterhrina/stranka/tree/main";
 
 function buildSecretListItem(folderName, categoryFolder) {
   const match = folderName.match(/^(\d+)\.\s*(.+)$/);
