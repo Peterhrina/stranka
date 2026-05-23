@@ -729,31 +729,35 @@ function openTaskViewer(category, folder, displayName) {
   viewer.hidden = false;
 
   loadSecretManifest().then((manifest) => {
-    const files =
+    const allFiles =
       (manifest[category] && manifest[category][folder]) || [];
+    const files = allFiles.filter((f) => fileExt(f) === "py");
 
     if (files.length === 0) {
       const p = document.createElement("p");
       p.className = "viewer__empty";
       p.textContent =
-        "Pre túto úlohu zatiaľ nie sú dostupné žiadne súbory.";
+        "Pre túto úlohu zatiaľ nie je dostupný žiadny .py súbor.";
       body.appendChild(p);
       return;
     }
 
-    files.forEach((file, idx) => {
-      const btn = document.createElement("button");
-      btn.className = "viewer__tab" + (idx === 0 ? " active" : "");
-      btn.textContent = file;
-      btn.addEventListener("click", () => {
-        tabsEl
-          .querySelectorAll(".viewer__tab")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderViewerFile(category, folder, file);
+    // Ak je len jeden .py – záložky vôbec nezobrazuj
+    if (files.length > 1) {
+      files.forEach((file, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "viewer__tab" + (idx === 0 ? " active" : "");
+        btn.textContent = file;
+        btn.addEventListener("click", () => {
+          tabsEl
+            .querySelectorAll(".viewer__tab")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderViewerFile(category, folder, file);
+        });
+        tabsEl.appendChild(btn);
       });
-      tabsEl.appendChild(btn);
-    });
+    }
 
     renderViewerFile(category, folder, files[0]);
   });
