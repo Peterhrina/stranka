@@ -1,0 +1,242 @@
+{
+  "Grafické úlohy": {
+    "1. Háďa": [
+      "1zadanie.png",
+      "hra.py"
+    ],
+    "10. Vykreslenie krížovky 1": [
+      "10zadanie.png",
+      "krizovka1-1.txt",
+      "krizovky.py"
+    ],
+    "13. Žrút": [
+      "13zadanie.png",
+      "zrut.py"
+    ],
+    "15. Zobrazenie zátvoriek - NEDOROBENE": [
+      "15zadanie.png",
+      "zatvorky.py"
+    ],
+    "18. Kresliaci robot 1": [
+      "robot.py",
+      "robot_esteraz.py"
+    ],
+    "19. Preklopenie obrázka": [],
+    "26. Krajina": [],
+    "3. Displej v električke": [
+      "3zadanie.png",
+      "elektricka.py",
+      "zastavky.txt"
+    ],
+    "30. NIM": [
+      "30 zle.py",
+      "30zadanie.png"
+    ],
+    "31. Čiernobiely obrázok": [],
+    "33. Spektrum odtieňov": [],
+    "35. Vykreslenie komprimovaného obrázka": [],
+    "36. Vykreslenie krížovky 2": [],
+    "41. Výber jedla": [
+      "42.py",
+      "42zadanie.png",
+      "vyber_jedla.txt"
+    ],
+    "42. Zachráň padajúce vajíčko": [],
+    "43. Pyrotechnik": [],
+    "44. Uhádni padajúce slovo": [],
+    "47. Čiarový kód": [
+      "47.py",
+      "47zadanie.png",
+      "ciarovy_kod_1.txt"
+    ],
+    "49. Rezervácia miesteniek": [
+      "49 4z5.py"
+    ],
+    "50. Obrys obrázka": [],
+    "53. Zástavba na ulici": [
+      "53.py",
+      "pisomka.py",
+      "zastavba_na_ulici.txt"
+    ],
+    "54. Lodičky": [],
+    "55. Kresliaci robot 2": [
+      "55.py",
+      "55zadanie.png",
+      "kresliaci_robot2.txt"
+    ],
+    "56. Editor levelov 1": [
+      "56.py",
+      "56zadanie.png",
+      "editor_levelov1_vystup.txt"
+    ],
+    "57. Editor levelov 2": [],
+    "58. Trasa linky metra": [
+      "58.py",
+      "58zadanie.png",
+      "trasa_linky_metra.txt"
+    ],
+    "59. Vyťaženosť autobusovej linky": [
+      "59.py",
+      "59zadanie.png",
+      "vytazenost_autobusevej_linky.txt"
+    ],
+    "6. Noty": [
+      "6zadanie.png",
+      "na_hodine.py",
+      "noty.py",
+      "noty.txt"
+    ],
+    "60. Kalkulačka": [
+      "60.py",
+      "60zadanie.png"
+    ],
+    "61. Delenie": [
+      "61.py",
+      "61zadanie.png"
+    ],
+    "62. Anketa": [
+      "62.py",
+      "62zadanie.png",
+      "anketa.txt"
+    ],
+    "64. Zasadací poriadok": [
+      "64zadanie.png",
+      "prvy_pokus.py",
+      "rychlo.py",
+      "zasadaci_poriadok.csv"
+    ],
+    "8. Nájdi puknutý tanier": [
+      "8zadanie.png",
+      "tanier.py",
+      "tanier_pro.py"
+    ],
+    "9. Preteky lodičiek": [
+      "9zadanie.png",
+      "lodicky.py",
+      "lodicky_pro.py"
+    ]
+  },
+  "Konzolové úlohy": {
+    "11. Súťaž v behu": [
+      "11-pro.py",
+      "11.py",
+      "sutaz_vbehu.txt",
+      "test.py"
+    ],
+    "12. Vyťaženosť liniek dopravného podniku": [
+      "12-pro.py",
+      "12.py",
+      "bus_vytazenost.txt",
+      "test.py"
+    ],
+    "14. Skok do diaľky": [
+      "14.py",
+      "test.py",
+      "test2.py",
+      "test3.py",
+      "test4.py"
+    ],
+    "16. Mená v stĺpcoch": [
+      "16.py",
+      "16_pro.py",
+      "mena_zamestnancov.txt",
+      "test.py",
+      "test2.py",
+      "test3.py",
+      "vystup.txt"
+    ],
+    "17. Tajná tabuľka": [
+      "17.py",
+      "17_2.py",
+      "test.py"
+    ],
+    "2. Háďa - priebeh hry": [
+      "2.py",
+      "hada.txt",
+      "zapiss.txt"
+    ],
+    "20. Tabuľka početnosti": [
+      "20.py",
+      "20_pro.py",
+      "tabulka_pocetnosti.txt",
+      "test.py"
+    ],
+    "21. Poprehadzovaný text 1": [
+      "21.py",
+      "21_pro.py",
+      "30.4.py",
+      "poprehadzovany_text1_vstup.txt",
+      "test.py",
+      "vysledok.txt"
+    ],
+    "22. Poprehadzovaný text 2": [
+      "22.py",
+      "22_pro.py",
+      "poprehadzovany_text.txt",
+      "poprehadzovany_text_vstup2.txt",
+      "test.py"
+    ],
+    "23. Zašifrovaný text 1": [
+      "23-pro.py",
+      "23.py",
+      "test.py",
+      "test2.py"
+    ],
+    "24. Zašifrovaný text 2": [
+      "24.py",
+      "test.py",
+      "test2.py",
+      "vstupny_text.txt",
+      "vystupny_text.txt",
+      "zasifrovany_text_2.txt"
+    ],
+    "25. Lotéria": [
+      "25.py",
+      "loteria_2.txt",
+      "test.py"
+    ],
+    "27. Vírus": [
+      "27.py",
+      "test.py",
+      "virus.txt",
+      "vystup.txt"
+    ],
+    "28. Hlasovanie 1": [
+      "28.py",
+      "hlasovanie_2.txt",
+      "test.txt"
+    ],
+    "29. Kompresia obrázka": [
+      "29.py",
+      "kompresia_obrazka_1.txt",
+      "painter.py"
+    ],
+    "32. Konverzia súboru 1": [
+      "32.py",
+      "ciernobiely_obrazok_1.txt",
+      "dekompresia_obrazka_vystup.txt",
+      "konverzia_suboru_1_vystup.txt"
+    ],
+    "34. Dekompresia obrázka": [
+      "34.py",
+      "dekompresia_obrazka_1.txt",
+      "dekompresia_obrazka_vystup.txt"
+    ],
+    "4. Záznamy z meteorologických staníc": [
+      "4.py",
+      "meteo_stanice.txt"
+    ],
+    "44. Hlasovanie 2": [
+      "44-pro.py",
+      "vysledok.txt"
+    ],
+    "5. Označené jedlá": [
+      "5(trenujem).py",
+      "5.py",
+      "objednane_jedla.txt"
+    ],
+    "7. Náhodné skúšanie": [
+      "7.py"
+    ]
+  }
+}
